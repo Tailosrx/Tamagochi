@@ -1,0 +1,18 @@
+-d
+"D:\\DAW\\M3\\UF4\\prueba poo\\build\\classes"
+-classpath
+"D:\\DAW\\M3\\UF4\\prueba poo\\build\\classes"
+-sourcepath
+"D:\\DAW\\M3\\UF4\\prueba poo\\src"
+-target
+19
+-encoding
+UTF-8
+-g
+-processorpath
+"D:\\DAW\\M3\\UF4\\prueba poo\\build\\empty"
+-s
+"D:\\DAW\\M3\\UF4\\prueba poo\\build\\generated-sources\\ap-source-output"
+-source
+19
+"D:\\DAW\\M3\\UF4\\prueba poo\\src\\main\\jugar.java"
