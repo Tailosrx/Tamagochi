@@ -13,7 +13,7 @@ public class Invertebrado {
     public static class Invertebrados extends Animal {
 
         public Invertebrados(String nombre, String mote, String grupo, String tipo, int salud) {
-            super(mote, nombre, tipo, grupo, salud);
+            super(mote, nombre, tipo, "Invertebrado", salud);
         }
 
         // Método para invertebrados

@@ -5,7 +5,7 @@ public class Vertebrado {
     public static class Vertebrados extends Animal {
 
         public Vertebrados(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(mote, nombre, tipo, grupo, salud);
+            super(mote, nombre, tipo, "Vertebrado", salud);
         }
 
         public void vertebradoInfo() {

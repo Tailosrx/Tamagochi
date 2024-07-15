@@ -26,12 +26,12 @@ public class jugar {
         ArrayList<Animal> animales = new ArrayList<>();
         animales.add(new Gato("Meu", "Gato", "Felinos", "vertebrado", 100));
         animales.add(new Gusano("Max", "Gusano", "Reptiles", "invertebrado", 100));
-        //animales.add(new Aguila("Aguila", "Articuno", "Aves", "vertebrado", 100));
-        //animales.add(new Tiburon("Tiburon", "Laboon", "Peces", "vertebrado", 100));
-        //animales.add(new Lagarto("Lagarto", "Zeira", "Reptiles", "vertebrado", 100));
-        //animales.add(new Koala("Koala", "Benito", "Mamiferos", "vertebrado", 100));
-        //animales.add(new Arana("Arana", "Shallan", "Aracnidos", "invertebrado", 100));
-        //animales.add(new Caracol("Caracol", "Turbo", "Moluscos", "invertebrado", 100));
+        animales.add(new Aguila("Articuno", "Aguila", "Aves", "vertebrado", 100));
+        animales.add(new Tiburon("Laboon", "Tiburon", "Peces", "vertebrado", 100));
+        animales.add(new Lagarto("Zeira", "Lagarto", "Reptiles", "vertebrado", 100));
+        animales.add(new Koala("Benito", "Koala", "Mamiferos", "vertebrado", 100));
+        animales.add(new Arana("Shallan", "Araña", "Aracnidos", "invertebrado", 100));
+        animales.add(new Caracol("Turbo", "Caracol", "Moluscos", "invertebrado", 100));
 
         System.out.println("Bienvenida a tu zoo personal.");
 
@@ -56,7 +56,6 @@ public class jugar {
 
                     if (index >= 0 && index < animales.size()) {
                         Animal animalAlimentar = animales.get(index);
-                        c.comer(animalAlimentar, teclat);
                         animales.get(index).mostrarInfo();
                     } else {
                         System.out.println("Animal inválido");
