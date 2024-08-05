@@ -1,123 +1,48 @@
 package info;
 
-public class Vertebrado {
+public class Vertebrado extends Animal {
 
-    public static class Vertebrados extends Animal {
+    public Vertebrado(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
+    }
 
-        public Vertebrados(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(mote, nombre, tipo, "Vertebrado", salud);
-        }
+    // Subclases específicas, por ejemplo:
+    public static class Felivoltio extends Vertebrado {
 
-        public void vertebradoInfo() {
-            System.out.println("Los vertebrados tienen columna vertebral");
+        public Felivoltio(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super("Meu", "FeliVoltio", "Electrico", salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    public static class Mamifero extends Vertebrados {
+    // Similar para otras subclases como Aguila, Tiburon, etc.
+    public static class Aguila extends Vertebrado {
 
-        public Mamifero(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para mamíferos
-        public void MamiferoInfo() {
-            System.out.println("Los mamíferos tienen glándulas mamarias.");
+        public Aguila(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    public static class Koala extends Mamifero {
+    public static class Tiburon extends Vertebrado {
 
-        public Koala(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Constructor
-    }
-
-    // Clase Gato (subclase de Mamifero)
-    public static class Gato extends Mamifero {
-
-        public Gato(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-    }
-
-    // Clase Ave (subclase de Vertebrado)
-    public static class Ave extends Vertebrados {
-
-        public Ave(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para aves
-        public void aveInfo() {
-            System.out.println("Las aves tienen plumas y ponen huevos.");
+        public Tiburon(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    public static class Aguila extends Ave {
+    public static class Lagarto extends Vertebrado {
 
-        public Aguila(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-    }
-
-    // Clase Pez (subclase de Vertebrado)
-    public static class Pez extends Vertebrados {
-
-        public Pez(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para peces
-        public void pezInfo() {
-            System.out.println("Los peces tienen aletas y branquias.");
+        public Lagarto(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    public static class Tiburon extends Pez {
+    public static class Koala extends Vertebrado {
 
-        public Tiburon(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-    }
-
-    // Clase Anfibio (subclase de Vertebrado)
-    public static class Anfibio extends Vertebrados {
-
-        public Anfibio(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para anfibios
-        public void anfibioInfo() {
-            System.out.println("Los anfibios pasan parte de su vida en el agua y parte en la tierra.");
+        public Koala(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
-
-    // Clase Reptil (subclase de Vertebrado)
-    public static class Reptil extends Vertebrados {
-
-        public Reptil(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para reptiles
-        public void reptilInfo() {
-            System.out.println("Los reptiles tienen escamas y ponen huevos con cáscara.");
-        }
-    }
-
-    public static class Lagarto extends Reptil {
-
-        public Lagarto(String nombre, String mote, String tipo, String grupo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Constructor
-    }
+    
+    
 
 }

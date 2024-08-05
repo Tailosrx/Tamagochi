@@ -5,11 +5,12 @@
 package main;
 
 import info.*;
-import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import juego.Cuidar;
+import java.util.Properties;
+
 
 /**
  *
@@ -19,27 +20,41 @@ public class UI extends javax.swing.JFrame {
 
     private List<Animal> animales;
     private BackgroundPanel mainPanel;
+    private int nivel;
 
     /**
      * Creates new form UI
      */
     public UI() {
-        initComponents();
-        animales = new ArrayList<>();
-        cargarAnimales();
-        misComponents();
 
+        animales = new ArrayList<>();
+        nivel = 1;
+        cargarAnimales();
+        initComponents();
+        misComponents();
     }
 
     private void cargarAnimales() {
-        animales.add(new Vertebrado.Gato("Meu", "Gato", "Felinos", "vertebrado", 100));
-        animales.add(new Invertebrado.Gusano("Max", "Gusano", "Reptiles", "invertebrado", 100));
-        animales.add(new Vertebrado.Aguila("Articuno", "Aguila", "Aves", "vertebrado", 100));
-        animales.add(new Vertebrado.Tiburon("Laboon", "Tiburon", "Peces", "vertebrado", 100));
-        animales.add(new Vertebrado.Lagarto("Zeira", "Lagarto", "Reptiles", "vertebrado", 100));
-        animales.add(new Vertebrado.Koala("Benito", "Koala", "Mamiferos", "vertebrado", 100));
-        animales.add(new Invertebrado.Arana("Shallan", "Araña", "Aracnidos", "invertebrado", 100));
-        animales.add(new Invertebrado.Caracol("Turbo", "Caracol", "Moluscos", "invertebrado", 100));
+
+        Properties information = new Properties();
+
+        try (InputStream input = getClass().getResourceAsStream("/info/information")) {
+            if (input == null) {
+                throw new IOException("Properties file not found");
+            }
+            information.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        animales.add(new Vertebrado.Felivoltio("Meu", "Felivoltio", "Electrico", 100, 1, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\meu.jpg", information.getProperty("Meu")));
+        animales.add(new Invertebrado.Gusano("Max", "Gusano", "Reptiles", 100, 2, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Vertebrado.Aguila("Articuno", "Aguila", "Aves", 100, 3, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Vertebrado.Tiburon("Laboon", "Tiburon", "Peces", 100, 4, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Vertebrado.Lagarto("Zeira", "Lagarto", "Reptiles", 100, 5, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Vertebrado.Koala("Benito", "Koala", "Mamiferos", 100, 6, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Invertebrado.Araña("Shallan", "Araña", "Aracnidos", 100, 7, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Invertebrado.Caracol("Turbo", "Caracol", "Moluscos", 100, 8, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
         // Agrega más animales según sea necesario
     }
 
@@ -57,8 +72,9 @@ public class UI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        b_enciclopedia.setBackground(new java.awt.Color(0, 0, 0));
+        b_enciclopedia.setBackground(java.awt.Color.black);
         b_enciclopedia.setFont(new java.awt.Font("Unispace", 0, 16)); // NOI18N
+        b_enciclopedia.setForeground(java.awt.Color.white);
         b_enciclopedia.setText("Enciclopedia");
         b_enciclopedia.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
         b_enciclopedia.setFocusPainted(false);
@@ -68,11 +84,17 @@ public class UI extends javax.swing.JFrame {
             }
         });
 
-        b_cuidar.setBackground(new java.awt.Color(0, 0, 0));
+        b_cuidar.setBackground(java.awt.Color.black);
         b_cuidar.setFont(new java.awt.Font("Unispace", 0, 16)); // NOI18N
+        b_cuidar.setForeground(java.awt.Color.white);
         b_cuidar.setText("Cuidar");
         b_cuidar.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.red));
         b_cuidar.setFocusPainted(false);
+        b_cuidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_cuidarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,10 +118,27 @@ public class UI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void misComponents() {
-         mainPanel = new BackgroundPanel();
+        mainPanel = new BackgroundPanel("/main/zoo.jpg"); // Usa la ruta relativa correcta para la imagen
+        setContentPane(mainPanel);
+
+        b_enciclopedia = new javax.swing.JButton();
+        b_cuidar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        // Configurar los botones
+        b_enciclopedia.setText("Enciclopedia");
+        b_enciclopedia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_enciclopediaActionPerformed(evt);
+            }
+        });
+
+        b_cuidar.setText("Cuidar");
 
         // Configurar el layout del panel principal
         mainPanel.setLayout(null); // Layout nulo para posicionar manualmente los componentes
@@ -113,18 +152,29 @@ public class UI extends javax.swing.JFrame {
         mainPanel.add(b_cuidar);
 
         // Añadir el panel principal al JFrame
-        getContentPane().add(mainPanel);
-        pack(); // Empaquetar el JFrame
+        setContentPane(mainPanel);
+        mainPanel.revalidate();
+        mainPanel.repaint();
 
     }
 
+
     private void b_enciclopediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_enciclopediaActionPerformed
         // TODO add your handling code here:
-        EnciclopediaDialog dialog = new EnciclopediaDialog(animales);
-        dialog.setVisible(true);
+        new EnciclopediaDialog(animales, nivel).setVisible(true);
+
 
     }//GEN-LAST:event_b_enciclopediaActionPerformed
 
+    private void b_cuidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cuidarActionPerformed
+        // TODO add your handling code here:
+         new Cuidar(animales, nivel).setVisible(true);
+         
+    }//GEN-LAST:event_b_cuidarActionPerformed
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */

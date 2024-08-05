@@ -1,47 +1,59 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package main;
 
 import info.Animal;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-/**
- *
- * @author kevin
- */
-public class EnciclopediaDialog extends JDialog{
-   
-     public EnciclopediaDialog(List<Animal> animales) {
+
+public class EnciclopediaDialog extends JDialog {
+
+    private JList<String> animalList;
+    private JPanel detailPanel;
+    private List<Animal> animales;
+    private int playerLevel;
+
+    public EnciclopediaDialog(List<Animal> animales, int playerLevel) {
+        this.playerLevel = playerLevel;
+        this.animales = animales;
+
         setTitle("Enciclopedia de Animales");
-        setSize(400, 600);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setModal(true);
+        setLayout(new BorderLayout());
 
-        JPanel mainPanel = new JPanel(new GridLayout(0, 1));
-        mainPanel.setBackground(Color.BLACK);
-
+        DefaultListModel<String> listModel = new DefaultListModel<>();
         for (Animal animal : animales) {
-            JPanel animalPanel = createAnimalPanel(animal);
-            mainPanel.add(animalPanel);
+            if (animal.getNivelDesbloqueo() <= playerLevel) {
+                listModel.addElement(animal.getMote());
+            } else {
+                listModel.addElement("(Desbloqueado en nivel " + animal.getNivelDesbloqueo() + ")");
+            }
         }
 
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        add(scrollPane, BorderLayout.CENTER);
+        animalList = new JList<>(listModel);
+        animalList.setFont(new Font("Poppins", Font.PLAIN, 14));
+        animalList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        animalList.addListSelectionListener(e -> showAnimalDetails(animalList.getSelectedIndex()));
+        JScrollPane listScrollPane = new JScrollPane(animalList);
+        animalList.setBackground(Color.BLACK);
+        animalList.setForeground(Color.WHITE);
+        animalList.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+
+        listScrollPane.setPreferredSize(new Dimension(200, 600));
+
+        detailPanel = new JPanel();
+        detailPanel.setLayout(new BoxLayout(detailPanel, BoxLayout.Y_AXIS));
+        detailPanel.setBackground(Color.DARK_GRAY);
+        detailPanel.setBorder(BorderFactory.createLineBorder(Color.ORANGE, 2));
+        JScrollPane detailScrollPane = new JScrollPane(detailPanel);
+        detailScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        detailScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        detailScrollPane.getVerticalScrollBar().setUnitIncrement(16);
+
+        add(listScrollPane, BorderLayout.WEST);
+        add(detailScrollPane, BorderLayout.CENTER);
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -51,38 +63,69 @@ public class EnciclopediaDialog extends JDialog{
         });
     }
 
-    private JPanel createAnimalPanel(Animal animal) {
-        JPanel panel = new JPanel(new GridLayout(0, 1));
-        panel.setBackground(Color.DARK_GRAY);
-        panel.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
-        panel.setPreferredSize(new Dimension(350, 100));
+    private void showAnimalDetails(int index) {
+        Animal selectedAnimal = animales.get(index);
+        if (selectedAnimal.getNivelDesbloqueo() > playerLevel) {
+            return; // Skip locked animals
+        }
 
-        JLabel nameLabel = new JLabel(animal.getNombre());
+        detailPanel.removeAll();
+
+        JLabel nameLabel = new JLabel(selectedAnimal.getMote());
         nameLabel.setForeground(Color.WHITE);
-        nameLabel.setFont(new Font("Unispace", Font.BOLD, 16));
+        nameLabel.setFont(new Font("Poppins", Font.BOLD, 16));
+        nameLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        JLabel moteLabel = new JLabel("Mote: " + animal.getMote());
-        moteLabel.setForeground(Color.LIGHT_GRAY);
-        moteLabel.setFont(new Font("Unispace", Font.ITALIC, 12));
-
-        JLabel tipoLabel = new JLabel("Tipo: " + animal.getTipo());
+        JLabel tipoLabel = new JLabel(selectedAnimal.getTipo());
         tipoLabel.setForeground(Color.WHITE);
-        tipoLabel.setFont(new Font("Unispace", Font.PLAIN, 12));
+        tipoLabel.setFont(new Font("Poppins", Font.BOLD, 13));
+        tipoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        JLabel grupoLabel = new JLabel("Grupo: " + animal.getGrupo());
+        JLabel grupoLabel = new JLabel(selectedAnimal.getGrupo());
         grupoLabel.setForeground(Color.WHITE);
-        grupoLabel.setFont(new Font("Unispace", Font.PLAIN, 12));
+        grupoLabel.setFont(new Font("Poppins", Font.BOLD, 13));
+        grupoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+       
 
-        JLabel saludLabel = new JLabel("Salud: " + animal.getSalud());
-        saludLabel.setForeground(Color.WHITE);
-        saludLabel.setFont(new Font("Unispace", Font.PLAIN, 12));
+        // Creating a health bar
+        JProgressBar healthBar = new JProgressBar(0, 100);
+        healthBar.setValue(selectedAnimal.getSalud());
+        healthBar.setStringPainted(true);
+        healthBar.setForeground(Color.GREEN);
+        healthBar.setBackground(Color.RED);
+        healthBar.setPreferredSize(new Dimension(200, 20));
+        healthBar.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
 
-        panel.add(nameLabel);
-        panel.add(moteLabel);
-        panel.add(tipoLabel);
-        panel.add(grupoLabel);
-        panel.add(saludLabel);
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(selectedAnimal.getImagePath()).getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH));
+        JLabel imageLabel = new JLabel(imageIcon);
+        
+        JTextArea info = new JTextArea(selectedAnimal.getInfo());
+        info.setWrapStyleWord(true);
+        info.setLineWrap(true);
+        info.setEditable(false);
+        info.setForeground(Color.WHITE);
+        info.setBackground(Color.DARK_GRAY);
+        info.setFont(new Font("Poppins", Font.BOLD, 13));
 
-        return panel;
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tipoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        grupoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        healthBar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        info.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        detailPanel.add(Box.createVerticalStrut(10)); // Add space at the top
+        detailPanel.add(imageLabel);
+        detailPanel.add(Box.createVerticalStrut(10)); // Add space between elements
+        detailPanel.add(nameLabel);
+        detailPanel.add(tipoLabel);
+        detailPanel.add(grupoLabel);
+        detailPanel.add(healthBar);
+        detailPanel.add(info);
+        detailPanel.add(Box.createVerticalGlue()); // Add space at the bottom
+
+        detailPanel.revalidate();
+        detailPanel.repaint();
     }
 }

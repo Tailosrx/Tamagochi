@@ -4,73 +4,32 @@
  */
 package info;
 
-/**
- *
- * @author kevin
- */
-public class Invertebrado {
+public class Invertebrado extends Animal {
 
-    public static class Invertebrados extends Animal {
+    public Invertebrado(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+        super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
+    }
 
-        public Invertebrados(String nombre, String mote, String grupo, String tipo, int salud) {
-            super(mote, nombre, tipo, "Invertebrado", salud);
-        }
+    // Subclases específicas, por ejemplo:
+    public static class Gusano extends Invertebrado {
 
-        // Método para invertebrados
-        public void invertebradoInfo() {
-            System.out.println("Los invertebrados no tienen columna vertebral");
+        public Gusano(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+            super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    // Clase Artropodo (subclase de Invertebrado)
-    public static class Artropodo extends Invertebrados {
+    public static class Araña extends Invertebrado {
 
-        public Artropodo(String nombre, String raza, String grupo, String tipo, int salud) {
-            super(nombre, raza, grupo, tipo, salud);
-        }
-
-        // Método para artrópodos
-        public void artropodoInfo() {
-            System.out.println("Los artrópodos tienen exoesqueleto y patas articuladas.");
+        public Araña(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+            super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
 
-    public static class Arana extends Artropodo {
+    public static class Caracol extends Invertebrado {
 
-        public Arana(String nombre, String raza, String grupo, String tipo, int salud) {
-            super(nombre, raza, grupo, tipo, salud);
-        }
-
-    }
-
-    // Clase Molusco (subclase de Invertebrado)
-    public static class Molusco extends Invertebrados {
-
-        public Molusco(String nombre, String raza, String grupo, String tipo, int salud) {
-            super(nombre, raza, grupo, tipo, salud);
-        }
-
-    }
-
-    public static class Caracol extends Molusco {
-
-        public Caracol(String nombre, String raza, String grupo, String tipo, int salud) {
-            super(nombre, raza, grupo, tipo, salud);
-        }
-
-    }
-
-    // Clase Gusano (subclase de Invertebrado)
-    public static class Gusano extends Invertebrados {
-
-        public Gusano(String nombre, String mote, String grupo, String tipo, int salud) {
-            super(nombre, mote, tipo, grupo, salud);
-        }
-
-        // Método para gusanos
-        public void gusanoInfo() {
-            System.out.println("Los gusanos son animales alargados y suaves.");
+        public Caracol(String mote, String tipo, String grupo, int salud, int nivelDesbloqueo, String imagePath, String info) {
+            super(mote, tipo, grupo, salud, nivelDesbloqueo, imagePath, info);
         }
     }
-
+    // Similar para otras subclases como Arana, Caracol, etc.
 }
