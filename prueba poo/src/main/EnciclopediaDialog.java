@@ -86,7 +86,15 @@ public class EnciclopediaDialog extends JDialog {
         grupoLabel.setFont(new Font("Poppins", Font.BOLD, 13));
         grupoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         
-       
+        JLabel hambreLabel = new JLabel("Hambre: " + selectedAnimal.getHambre());
+        hambreLabel.setForeground(Color.WHITE);
+        hambreLabel.setFont(new Font("Poppins", Font.BOLD, 13));
+        hambreLabel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+        
+        JLabel aburrimientoLabel = new JLabel("Aburrimiento: " + selectedAnimal.getAburrimiento());
+        aburrimientoLabel.setForeground(Color.WHITE);
+        aburrimientoLabel.setFont(new Font("Poppins", Font.BOLD, 13));
+        aburrimientoLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         // Creating a health bar
         JProgressBar healthBar = new JProgressBar(0, 100);
@@ -111,6 +119,8 @@ public class EnciclopediaDialog extends JDialog {
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         tipoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         grupoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        hambreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        aburrimientoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         healthBar.setAlignmentX(Component.CENTER_ALIGNMENT);
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         info.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -121,6 +131,8 @@ public class EnciclopediaDialog extends JDialog {
         detailPanel.add(nameLabel);
         detailPanel.add(tipoLabel);
         detailPanel.add(grupoLabel);
+        detailPanel.add(hambreLabel);
+        detailPanel.add(aburrimientoLabel);
         detailPanel.add(healthBar);
         detailPanel.add(info);
         detailPanel.add(Box.createVerticalGlue()); // Add space at the bottom

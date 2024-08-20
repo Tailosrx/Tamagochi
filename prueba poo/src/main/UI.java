@@ -47,14 +47,14 @@ public class UI extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        animales.add(new Vertebrado.Felivoltio("Meu", "Felivoltio", "Electrico", 100, 1, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\meu.jpg", information.getProperty("Meu")));
-        animales.add(new Invertebrado.Gusano("Max", "Gusano", "Reptiles", 100, 2, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Vertebrado.Aguila("Articuno", "Aguila", "Aves", 100, 3, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Vertebrado.Tiburon("Laboon", "Tiburon", "Peces", 100, 4, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Vertebrado.Lagarto("Zeira", "Lagarto", "Reptiles", 100, 5, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Vertebrado.Koala("Benito", "Koala", "Mamiferos", 100, 6, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Invertebrado.Araña("Shallan", "Araña", "Aracnidos", 100, 7, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
-        animales.add(new Invertebrado.Caracol("Turbo", "Caracol", "Moluscos", 100, 8, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu")));
+        animales.add(new Tipo.Felivoltio("Meu", "Felivoltio", "Electrico", 100, 1, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\meu.jpg", information.getProperty("Meu"), 50, 50));
+        animales.add(new Grupo.Gusano("Max", "Gusano", "Reptiles", 100, 2, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Tipo.Aguila("Articuno", "Aguila", "Aves", 100, 3, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Tipo.Tiburon("Laboon", "Tiburon", "Peces", 100, 4, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Tipo.Lagarto("Zeira", "Lagarto", "Reptiles", 100, 5, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Tipo.Koala("Benito", "Koala", "Mamiferos", 100, 6, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Grupo.Araña("Shallan", "Araña", "Aracnidos", 100, 7, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
+        animales.add(new Grupo.Caracol("Turbo", "Caracol", "Moluscos", 100, 8, "T:\\TAI\\DEVELOPER\\DAW\\M3\\UF5\\Generics\\Tamagochi\\prueba poo\\src\\main\\p.png",information.getProperty("Meu"), 50, 50));
         // Agrega más animales según sea necesario
     }
 
@@ -139,6 +139,12 @@ public class UI extends javax.swing.JFrame {
         });
 
         b_cuidar.setText("Cuidar");
+        b_cuidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b_cuidarActionPerformed(evt);
+            }
+        });
+
 
         // Configurar el layout del panel principal
         mainPanel.setLayout(null); // Layout nulo para posicionar manualmente los componentes
